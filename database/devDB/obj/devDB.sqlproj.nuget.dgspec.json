@@ -1,0 +1,51 @@
+{
+  "format": 1,
+  "restore": {
+    "/workspaces/azure-sql-db-developers-workshop/database/devDB/devDB.sqlproj": {}
+  },
+  "projects": {
+    "/workspaces/azure-sql-db-developers-workshop/database/devDB/devDB.sqlproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/workspaces/azure-sql-db-developers-workshop/database/devDB/devDB.sqlproj",
+        "projectName": "devDB",
+        "projectPath": "/workspaces/azure-sql-db-developers-workshop/database/devDB/devDB.sqlproj",
+        "packagesPath": "/home/vscode/.nuget/packages/",
+        "outputPath": "/workspaces/azure-sql-db-developers-workshop/database/devDB/obj/",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "/home/vscode/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net46"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net46": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU5128"
+          ]
+        }
+      },
+      "frameworks": {
+        "net46": {
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.0, )",
+              "autoReferenced": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

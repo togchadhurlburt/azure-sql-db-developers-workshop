@@ -1,0 +1,292 @@
+{
+  "$schema": "https://github.com/Azure/data-api-builder/releases/download/v0.9.6-rc/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string":  "Server=togazuredb.database.windows.net;Database=freeDB;User ID=sqladmin;Password=togWork!Nov*2023;TrustServerCertificate=true",
+    "options": {
+      "set-session-context": true
+    }
+  },
+  "runtime": {
+    "rest": {
+      "enabled": true,
+      "path": "/rest",
+      "request-body-strict": true
+    },
+    "graphql": {
+      "enabled": true,
+      "path": "/graphql",
+      "allow-introspection": true
+    },
+    "host": {
+      "cors": {
+        "origins": [],
+        "allow-credentials": false
+      },
+      "authentication": {
+        "provider": "StaticWebApps"
+      },
+      "mode": "development"
+    }
+  },
+  "entities": {
+    "person": {
+      "source": {
+        "object": "dbo.person",
+        "type": "table"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "person",
+          "plural": "people"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*"
+            }
+          ]
+        }
+      ],
+      "relationships": {
+        "address": {
+          "cardinality": "many",
+          "target.entity": "address",
+          "source.fields": [],
+          "target.fields": [],
+          "linking.source.fields": [],
+          "linking.target.fields": []
+        }
+      }
+    },
+    "address": {
+      "source": {
+        "object": "dbo.address",
+        "type": "table"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "address",
+          "plural": "addresses"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*"
+            }
+          ]
+        }
+      ]
+    },
+    "todo": {
+      "source": {
+        "object": "dbo.todo",
+        "type": "table"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "todo",
+          "plural": "todos"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*",
+              "policy": {
+                "database": "@item.owner_id eq 'public'"
+              }
+            }            
+          ]
+        },
+        {
+          "role": "authenticated",
+          "actions": [
+            {
+              "action": "*",
+              "policy": {
+                "database": "@item.owner_id eq @claims.userId"
+              }
+            }            
+          ]
+        }        
+      ],
+      "mappings": {
+        "position": "order"
+      }
+    },
+    "getPersonByPet": {
+      "source": {
+        "object": "dbo.get_person_by_pet",
+        "type": "stored-procedure",
+        "parameters": {
+          "pet": ""
+        }
+      },
+      "graphql": {
+        "enabled": true,
+        "operation": "query",
+        "type": {
+          "singular": "getPersonByPet",
+          "plural": "getPersonByPets"
+        }
+      },
+      "rest": {
+        "enabled": true,
+        "methods": [
+          "get"
+        ]
+      },
+        "permissions": [
+    {
+      "role": "anonymous",
+      "actions": [
+        {
+          "action": "*",
+          "policy": {
+            "database": "@item.owner_id eq 'public'"
+          }
+        }            
+      ]
+    },
+    {
+      "role": "authenticated",
+      "actions": [
+        {
+          "action": "*",
+          "policy": {
+            "database": "@item.owner_id eq @claims.userId"
+          }
+        }            
+      ]
+    }        
+  ]
+    },
+    "insert_todo": {
+      "source": {
+        "object": "dbo.insert_todo",
+        "type": "stored-procedure",
+        "parameters": {
+          "title": "",
+          "owner_id": "",
+          "order": ""
+        }
+      },
+      "graphql": {
+        "enabled": false,
+        "operation": "mutation",
+        "type": {
+          "singular": "insert_todo",
+          "plural": "insert_todos"
+        }
+      },
+      "rest": {
+        "enabled": true,
+        "methods": [
+          "post"
+        ]
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
+        }
+      ]
+    },
+    "update_todo": {
+      "source": {
+        "object": "dbo.update_todo",
+        "type": "stored-procedure",
+        "parameters": {
+          "id": "",
+          "title": "",
+          "owner_id": "",
+          "completed": false,
+          "order": ""
+        }
+      },
+      "graphql": {
+        "enabled": false,
+        "operation": "mutation",
+        "type": {
+          "singular": "update_todo",
+          "plural": "update_todos"
+        }
+      },
+      "rest": {
+        "enabled": true,
+        "methods": [
+          "post"
+        ]
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
+        }
+      ]
+    },
+    "delete_todo": {
+      "source": {
+        "object": "dbo.delete_todo",
+        "type": "stored-procedure",
+        "parameters": {
+          "id": "",
+          "owner_id": ""
+        }
+      },
+      "graphql": {
+        "enabled": false,
+        "operation": "mutation",
+        "type": {
+          "singular": "delete_todo",
+          "plural": "delete_todos"
+        }
+      },
+      "rest": {
+        "enabled": true,
+        "methods": [
+          "delete"
+        ]
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+/workspaces/azure-sql-db-developers-workshop/database/devDB/bin/Debug/devDB.dacpac
+/workspaces/azure-sql-db-developers-workshop/database/devDB/bin/Debug/devDB.dll
+/workspaces/azure-sql-db-developers-workshop/database/devDB/bin/Debug/devDB.pdb
+/workspaces/azure-sql-db-developers-workshop/database/devDB/obj/Debug/Model.xml
+/workspaces/azure-sql-db-developers-workshop/database/devDB/obj/Debug/refactor.xml
+/workspaces/azure-sql-db-developers-workshop/database/devDB/obj/Debug/postdeploy.sql
+/workspaces/azure-sql-db-developers-workshop/database/devDB/obj/Debug/predeploy.sql
+/workspaces/azure-sql-db-developers-workshop/database/devDB/obj/Debug/devDB.dll
+/workspaces/azure-sql-db-developers-workshop/database/devDB/obj/Debug/devDB.pdb

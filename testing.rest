@@ -1,0 +1,9 @@
+fetch('/.auth/me')
+  .then(res => {
+    return res.json()
+  })
+  .then(payload => {
+    const { clientPrincipal } = payload;
+    this.userDetails = clientPrincipal?.userDetails;
+    this.userId = clientPrincipal?.userId;
+  });
